@@ -1,10 +1,11 @@
+from turtle import clear
 import functions
 def main() : 
     Pos = []
     Neg = []
-    Pos, Neg = functions.getRandomImages(500, Pos, Neg)
-    functions.results(Pos, "positive", 60)
-    functions.results(Neg, "negative", 60)
+    Pos, Neg = functions.getRandom225x225(500, Pos, Neg)
+    functions.results(Pos, "positive")
+    functions.results(Neg, "negative")
     return 0;
 
 main()

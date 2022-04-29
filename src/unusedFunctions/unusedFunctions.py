@@ -101,13 +101,13 @@ def pcacompv1(img):
 
 def applyFilter(img):
     #Applying a low-pass filter to the image 
-    filterImage = img.filter(PIL.ImageFilter.GaussianBlur)
-    return filterImage
+    #filterImage = img.filter(PIL.ImageFilter.GaussianBlur)
+    return 0; 
 
 def imDeco(img, images):
         w, h = img.size
         i = 0
-        img = grayscale(img)
+        #img = grayscale(img)
         addImg(img, w, h,images)
         return images
     
@@ -124,3 +124,10 @@ def addImg(im, w, h,images):
         w1 = w1+size
         h1 = h1+size
     return 
+
+# Needs getIm() function from v2/functions
+def getRandomImages(amount, Pos, Neg):
+    #getIm(True, amount, Pos)
+    #getIm(False, amount, Neg)
+    #convert grayscale here
+    return Pos, Neg

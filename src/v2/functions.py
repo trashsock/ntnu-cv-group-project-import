@@ -40,7 +40,6 @@ def grayscale(img):
     #grayscale_img = Image.fromarray(np.uint8(grayscale_img))
     return grayscale_img
 
-
 def checkIfCrack(image):
   #The checkIfCrack function takes image opened through the PIL library as a parameter
   image = np.array(image)
@@ -119,7 +118,7 @@ def results(images, sampleType):
 
 def getIm(typ, amount, arr):
     dupes = []
-    for i in range (amount):
+    for _ in range (amount):
         getint, dupes = getUniqueRand(dupes)
         get = str(getint)
         digits = len(get)
@@ -129,27 +128,9 @@ def getIm(typ, amount, arr):
             get = "0" + get
             digits = len(get)
         if typ:
-            get = "././testdata/Positive" + get + ".jpg"
+            get = "cv2206-project/testdata/Positive/" + get + ".jpg"
         else:
-            get = "././testdata/Negative/" + get + ".jpg"
-        im = PIL.Image.open(get)
-        arr.append(im)
-
-def getIm(typ, amount, arr):
-    dupes = []
-    for i in range (amount):
-        getint, dupes = getUniqueRand(dupes)
-        get = str(getint)
-        digits = len(get)
-        if digits == 5 and getint < 19379 and typ:
-            get = get + "_1"
-        while digits < 5:
-            get = "0" + get
-            digits = len(get)
-        if typ:
-            get = "/Positive" + get + ".jpg"
-        else:
-            get = "/Negative/" + get + ".jpg"
+            get = "cv2206-project/testdata/Negative/" + get + ".jpg"
         im = PIL.Image.open(get)
         arr.append(im)
       
@@ -171,10 +152,12 @@ def cutIm(arr):
         retArr.append(im)
     return retArr
 
+#Need getIm function from v2/functions
 # Returns two arrays positive and negative which contains amount images each
 def getRandom225x225(amount, Pos, Neg):
     getIm(True, amount, Pos)
     getIm(False, amount, Neg)
     Pos = cutIm(Pos)
     Neg = cutIm(Neg)
+    results()
     return Pos, Neg
