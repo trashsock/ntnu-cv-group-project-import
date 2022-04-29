@@ -21,9 +21,9 @@ def getIm(typ, amount, arr):
             get = "0" + get
             digits = len(get)
         if typ:
-            get = "././testdata/Positive/" + get + ".jpg"
+            get = "cv2206-project/testdata/Positive/" + get + ".jpg"
         else:
-            get = "././testdata/Negative/" + get + ".jpg"
+            get = "cv2206-project/testdata/Negative/" + get + ".jpg"
         im = cv2.imread(get)
         arr.append(im)
 
