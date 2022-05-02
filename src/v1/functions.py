@@ -61,13 +61,18 @@ def results(images, sampleType, max = 50):
     else:
       negative += 1
   if sampleType.lower() == "positive":
-    print("Results after testing", len(images), "images that are positive of having cracks:")
-    print("Total Positives: ", positive, "/", len(images))
-    print("Total False-negatives: ", negative, "/", len(images))
-    print("Accuracy:" , (positive/len(images))*100, "%")
+    list = [positive, negative]
+    txt1 = ("Results after testing", len(images), "images that are positive of having cracks:")
+    txt2 = ("Total Positives: ", positive, "/", len(images), "")
+    txt3 = ("Total False-negatives: ", negative, "/", len(images))
+    txt4 = ("Accuracy:" , (positive/len(images))*100, "%")
+    list = [txt1,txt2,txt3,txt4]
+    return list
  
   if sampleType.lower() == "negative":
-    print("Results after testing", len(images), "images that are negative of having cracks:")
-    print("Total Negatives: ", negative, "/", len(images))
-    print("Total False-positives: ", positive, "/", len(images))
-    print("Accuracy:" , (negative/len(images))*100, "%")   
+    txt1 = ("Results after testing", len(images), "images that are negative of having cracks:")
+    txt2 = ("Total Negatives: ", negative, "/", len(images))
+    txt3 = ("Total False-positives: ", positive, "/", len(images))
+    txt4 = ("Accuracy:" , (negative/len(images))*100,)
+    list = [txt1,txt2,txt3,txt4]
+    return list

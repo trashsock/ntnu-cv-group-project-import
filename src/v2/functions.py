@@ -13,6 +13,7 @@ from scipy import signal
 import math
 import torch
 import random
+
 def pcacomp(img): 
   img = np.array(img)
   #print("Original image : ", img.shape)
@@ -105,16 +106,20 @@ def results(images, sampleType):
     else:
       negative += 1
   if sampleType.lower() == "positive":
-    print("Results after testing", len(images), "images that are positive of having cracks:")
-    print("Total Positives: ", positive, "/", len(images))
-    print("Total False-negatives: ", negative, "/", len(images))
-    print("Accuracy:" , (positive/len(images))*100, "%")
+    txt1 = ("Results after testing", len(images), "images that are positive of having cracks:")
+    txt2 = ("Total Positives: ", positive, "/", len(images), "")
+    txt3 = ("Total False-negatives: ", negative, "/", len(images))
+    txt4 = ("Accuracy:" , (positive/len(images))*100, "%")
+    list = [txt1,txt2,txt3,txt4]
+    return list
  
   if sampleType.lower() == "negative":
-    print("Results after testing", len(images), "images that are negative of having cracks:")
-    print("Total Negatives: ", negative, "/", len(images))
-    print("Total False-positives: ", positive, "/", len(images))
-    print("Accuracy:" , (negative/len(images))*100, "%")   
+    txt1 = ("Results after testing", len(images), "images that are negative of having cracks:")
+    txt2 = ("Total Negatives: ", negative, "/", len(images))
+    txt3 = ("Total False-positives: ", positive, "/", len(images))
+    txt4 = ("Accuracy:" , (negative/len(images))*100,)
+    list = [txt1,txt2,txt3,txt4]
+    return list 
 
 def getIm(typ, amount, arr):
     dupes = []
@@ -133,8 +138,8 @@ def getIm(typ, amount, arr):
             get = "cv2206-project/testdata/Negative/" + get + ".jpg"
         im = PIL.Image.open(get)
         arr.append(im)
-      
-#Returns a rendom number that has not yet been added to the given array
+
+#Returns a random number that has not yet been added to the given array
 def getUniqueRand(dupes):
     dupe = True
     while dupe:
@@ -147,7 +152,10 @@ def getUniqueRand(dupes):
 def cutIm(arr):
     retArr = []
     for i in arr:
-        im = i.crop((0, 0, 225, 225))
+        width, height = i.size
+        height = math.isqrt(height)
+        width = math.isqrt(width)
+        im = i.crop((0, 0, width*width, height*height))
         im = pcacomp(im)
         retArr.append(im)
     return retArr
@@ -159,5 +167,4 @@ def getRandom225x225(amount, Pos, Neg):
     getIm(False, amount, Neg)
     Pos = cutIm(Pos)
     Neg = cutIm(Neg)
-    results()
     return Pos, Neg
