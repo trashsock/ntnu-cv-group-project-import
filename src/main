@@ -59,4 +59,4 @@ while True:
         else: 
             res = v2.v2main()
             UpdateOutput(res)
-windows.close()
+pg.windows.close()
